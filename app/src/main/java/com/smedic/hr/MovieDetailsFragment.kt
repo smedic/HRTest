@@ -30,7 +30,22 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "--->: ${arguments?.get(MOVIE_NAME)}")
-        name.text = arguments?.get(MOVIE_NAME) as String
+        val movieName = arguments?.get(MOVIE_NAME) as String;
+        name.text = movieName
+
+        val movieDetail = viewModel.getMovieInfo(movieName)
+        Log.d(TAG, "---------------")
+        Log.d(TAG, "----> : ${movieDetail.name}")
+        Log.d(TAG, "----> : ${movieDetail.score}")
+        Log.d(TAG, "----> : ${movieDetail.description}")
+        Log.d(TAG, "----> : ${movieDetail.actors.size}")
+
+        for(actor in movieDetail.actors) {
+            Log.d(TAG, "----> actor : ${actor.name}")
+            Log.d(TAG, "----> actor : ${actor.age}")
+            Log.d(TAG, "----> actor : ${actor.imageUrl}")
+        }
+
     }
 
     companion object {
