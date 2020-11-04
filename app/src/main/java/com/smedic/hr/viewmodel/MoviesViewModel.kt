@@ -35,7 +35,7 @@ class MoviesViewModel : ViewModel() {
     }
 
     private suspend fun getMoviesFromNative() = withContext(Dispatchers.IO) {
-        val data = async { loadMovies() }
+        val data = async { getMovies() }
         try {
             movies.postValue(data.await())
         } catch (e: Exception) {
@@ -52,4 +52,6 @@ class MoviesViewModel : ViewModel() {
         }
         return movies
     }
+
+    external fun getMovies(): ArrayList<Movie>
 }
