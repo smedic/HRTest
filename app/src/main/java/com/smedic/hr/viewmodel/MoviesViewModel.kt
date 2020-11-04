@@ -1,4 +1,4 @@
-package com.smedic.hr
+package com.smedic.hr.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
