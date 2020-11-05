@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.item_list.*
 class MoviesListFragment : Fragment() {
 
     private var TAG = "SMEDIC"
-    private val viewModel by viewModels<MoviesViewModel>()
+    private val viewModel by activityViewModels<MoviesViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +59,7 @@ class MoviesListFragment : Fragment() {
         item_list.layoutManager = LinearLayoutManager(requireActivity())
         item_list.adapter = MoviesRecyclerViewAdapter(movies) {
             Log.d(TAG, "clicked: ${it.name}")
-            val bundle = bundleOf(MovieDetailsFragment.MOVIE_NAME to it.name)
+            val bundle = bundleOf(MovieDetailsFragment.MOVIE_ID to it.id)
             Navigation.findNavController(view).navigate(R.id.action_list_to_detail, bundle)
         }
     }

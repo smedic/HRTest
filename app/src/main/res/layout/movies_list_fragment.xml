@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_grey"
     android:fitsSystemWindows="true">
 
     <FrameLayout
@@ -10,16 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/movie_background" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black_transparent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,9 +21,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
                 android:padding="22dp"
-                android:text="Movie App"
-                android:textSize="32sp" />
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:text="Movie App" />
 
             <include layout="@layout/item_list" />
         </LinearLayout>

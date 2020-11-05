@@ -1,11 +1,11 @@
 package com.smedic.hr.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.smedic.hr.model.Movie
-import com.smedic.hr.model.MovieDetail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -44,20 +44,12 @@ class MoviesViewModel : ViewModel() {
         }
     }
 
-    private fun loadMovies(): List<Movie> {
-        val movies = ArrayList<Movie>()
-        val cnt = 10
-        var i = 0;
-        while (i++ < cnt) {
-            movies.add(Movie("Top Gun", 111))
+    fun getMovie(id: Int): Movie? {
+        Log.d("SMEDIC", ": ${movies.value?.size}");
+        return movies.value?.first {
+            it.id == id
         }
-        return movies
-    }
-
-    fun getMovieInfo(name: String): MovieDetail {
-        return getMovieDetails(name)
     }
 
     private external fun getMovies(): ArrayList<Movie>
-    private external fun getMovieDetails(name: String): MovieDetail
 }

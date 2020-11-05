@@ -32,7 +32,7 @@ class MoviesRecyclerViewAdapter(
         holder.idView.text = item.lastUpdated.toString()
         holder.contentView.text = item.name
         Picasso.get()
-            .load("https://image.cnbcfm.com/api/v1/image/105814861-1553608877209ben-affleck-batman-1.jpg?v=1553609938&w=1600&h=900")
+            .load(item.posterUrl)
             .into(holder.photo)
 
         holder.itemView.setOnClickListener {
