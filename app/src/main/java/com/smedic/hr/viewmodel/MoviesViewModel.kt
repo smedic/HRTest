@@ -1,6 +1,5 @@
 package com.smedic.hr.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,21 +19,18 @@ import kotlinx.coroutines.withContext
 class MoviesViewModel : ViewModel() {
 
     private val movies: MutableLiveData<List<Movie>> by lazy {
-        MutableLiveData<List<Movie>>().also {
-            loadItems()
-        }
+        MutableLiveData<List<Movie>>().also { loadItems() }
     }
 
     private fun loadItems() {
-        viewModelScope.launch {
-            getMoviesFromNative()
-        }
+        viewModelScope.launch { getMoviesFromNative() }
     }
 
     fun getItems(): LiveData<List<Movie>> {
         return movies
     }
 
+    //TODO CHECK DISPATCHER
     private suspend fun getMoviesFromNative() = withContext(Dispatchers.IO) {
         val data = async { getMovies() }
         try {
@@ -45,10 +41,7 @@ class MoviesViewModel : ViewModel() {
     }
 
     fun getMovie(id: Int): Movie? {
-        Log.d("SMEDIC", ": ${movies.value?.size}");
-        return movies.value?.first {
-            it.id == id
-        }
+        return movies.value?.first { it.id == id }
     }
 
     private external fun getMovies(): ArrayList<Movie>

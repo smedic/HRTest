@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true">
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -23,11 +23,18 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
                 android:padding="22dp"
+                android:text="Movie App"
                 android:textColor="@color/white"
-                android:textSize="32sp"
-                android:text="Movie App" />
+                android:textSize="32sp" />
 
-            <include layout="@layout/item_list" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movies_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/list_item_movie" />
         </LinearLayout>
     </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

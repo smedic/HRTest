@@ -1,7 +1,6 @@
 package com.smedic.hr
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.smedic.hr.adapter.MoviesRecyclerViewAdapter
 import com.smedic.hr.model.Movie
 import com.smedic.hr.viewmodel.MoviesViewModel
-import kotlinx.android.synthetic.main.item_list.*
+import kotlinx.android.synthetic.main.movies_list_fragment.*
 
 /**
  * @author Stevan Medic
@@ -25,7 +24,6 @@ import kotlinx.android.synthetic.main.item_list.*
 
 class MoviesListFragment : Fragment() {
 
-    private var TAG = "SMEDIC"
     private val viewModel by activityViewModels<MoviesViewModel>()
 
     override fun onCreateView(
@@ -53,12 +51,11 @@ class MoviesListFragment : Fragment() {
         verticalDecorator.setDrawable(drawable!!)
         horizontalDecorator.setDrawable(drawable)
 
-        item_list.addItemDecoration(verticalDecorator);
-        item_list.addItemDecoration(horizontalDecorator);
+        movies_list.addItemDecoration(verticalDecorator)
+        movies_list.addItemDecoration(horizontalDecorator)
         //item_list.layoutManager = GridLayoutManager(this, 2)
-        item_list.layoutManager = LinearLayoutManager(requireActivity())
-        item_list.adapter = MoviesRecyclerViewAdapter(movies) {
-            Log.d(TAG, "clicked: ${it.name}")
+        movies_list.layoutManager = LinearLayoutManager(requireActivity())
+        movies_list.adapter = MoviesRecyclerViewAdapter(movies) {
             val bundle = bundleOf(MovieDetailsFragment.MOVIE_ID to it.id)
             Navigation.findNavController(view).navigate(R.id.action_list_to_detail, bundle)
         }

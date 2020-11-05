@@ -7,8 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.smedic.hr.R
-import com.smedic.hr.model.Movie
-import com.smedic.hr.tools.formattedRating
+import com.smedic.hr.model.Actor
 import com.squareup.picasso.Picasso
 
 /**
@@ -16,24 +15,23 @@ import com.squareup.picasso.Picasso
  *
  * Created on Nov 2020
  */
-class MoviesRecyclerViewAdapter(
-    private val values: List<Movie>,
-    val clickListener: (Movie) -> Unit
+class ActorsRecyclerViewAdapter(
+    private val values: List<Actor>,
+    val clickListener: (Actor) -> Unit
 ) :
-    RecyclerView.Adapter<MoviesRecyclerViewAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ActorsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item_movie, parent, false)
+            .inflate(R.layout.list_item_actor, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.name.text = item.name
-        holder.rating.text = item.score.formattedRating()
         Picasso.get()
-            .load(item.posterUrl)
+            .load(item.imageUrl)
             .into(holder.photo)
 
         holder.itemView.setOnClickListener {
@@ -45,7 +43,6 @@ class MoviesRecyclerViewAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.name)
-        val rating: TextView = view.findViewById(R.id.rating)
         val photo: ImageView = view.findViewById(R.id.photo)
     }
 }

@@ -21,6 +21,7 @@ namespace movies {
         int age;
         //optional challenge 1: Load image from URL
         std::string imageUrl;
+        std::string biographyUrl;
     };
 
     class Movie {
@@ -61,24 +62,28 @@ namespace movies {
                 tomCruise.name = "Tom Cruise";
                 tomCruise.age = 50;
                 tomCruise.imageUrl = "https://pyxis.nymag.com/v1/imgs/4e5/1f7/a917c50e70a4c16bc35b9f0d8ce0352635-14-tom-cruise.rsquare.w700.jpg";
+                tomCruise.biographyUrl = "https://www.imdb.com/name/nm0000129";
                 movie->actors.push_back(tomCruise);
 
                 auto valKilmer = Actor();
                 valKilmer.name = "Val Kilmer";
                 valKilmer.age = 46;
                 valKilmer.imageUrl = "https://m.media-amazon.com/images/M/MV5BMTk3ODIzMDA5Ml5BMl5BanBnXkFtZTcwNDY0NTU4Ng@@._V1_UY317_CR4,0,214,317_AL_.jpg";
+                valKilmer.biographyUrl = "https://www.imdb.com/name/nm0000174";
                 movie->actors.push_back(valKilmer);
 
                 auto timRobbins = Actor();
                 timRobbins.name = "Tim Robbins";
                 timRobbins.age = 55;
                 timRobbins.imageUrl = "https://m.media-amazon.com/images/M/MV5BMTI1OTYxNzAxOF5BMl5BanBnXkFtZTYwNTE5ODI4._V1_UY317_CR16,0,214,317_AL_.jpg";
+                timRobbins.biographyUrl = "https://www.imdb.com/name/nm0000209";
                 movie->actors.push_back(timRobbins);
 
                 auto jenniferConnelly = Actor();
                 jenniferConnelly.name = "Jennifer Connelly";
                 jenniferConnelly.age = 39;
                 jenniferConnelly.imageUrl = "https://m.media-amazon.com/images/M/MV5BOTczNTgzODYyMF5BMl5BanBnXkFtZTcwNjk4ODk4Mw@@._V1_UY317_CR12,0,214,317_AL_.jpg";
+                jenniferConnelly.biographyUrl = "https://www.imdb.com/name/nm0000124";
                 movie->actors.push_back(jenniferConnelly);
 
                 _movies.push_back(movie);
