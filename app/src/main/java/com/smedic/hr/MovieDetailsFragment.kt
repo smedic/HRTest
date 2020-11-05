@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.smedic.hr.model.Movie
 import com.smedic.hr.viewmodel.MoviesViewModel
 import com.squareup.picasso.Picasso
@@ -20,6 +21,7 @@ import java.text.DecimalFormat
  */
 
 class MovieDetailsFragment : Fragment() {
+
     private var TAG = "SMEDIC"
     private val viewModel by activityViewModels<MoviesViewModel>()
 
@@ -32,11 +34,7 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "--->: ${arguments?.get(MOVIE_ID)}")
         val movieId = arguments?.get(MOVIE_ID) as Int
-
-        Log.d(TAG, "---->DA>D>SAD> :  ${viewModel.getMovie(movieId)}");
-
         viewModel.getMovie(movieId)?.let { setMovieLayout(it) }
     }
 
@@ -49,7 +47,9 @@ class MovieDetailsFragment : Fragment() {
 
         title.text = movie.name
         description.text = movie.description
-
+        closeButton.setOnClickListener {
+            Navigation.findNavController(it).popBackStack()
+        }
         val df = DecimalFormat("0.0")
         val score = "${df.format(movie.score)}/10"
         rating.text = score
