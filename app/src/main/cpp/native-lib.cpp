@@ -26,6 +26,7 @@ Java_com_smedic_hr_viewmodel_MoviesViewModel_getMovies(JNIEnv* env, jobject) {
         jfieldID scoreField = env->GetFieldID(movieClass, "score", "F");
         jfieldID descriptionField = env->GetFieldID(movieClass, "description", "Ljava/lang/String;");
         jfieldID posterUrlField = env->GetFieldID(movieClass, "posterUrl", "Ljava/lang/String;");
+        jfieldID trailerYouTubeIdField = env->GetFieldID(movieClass, "trailerYouTubeId", "Ljava/lang/String;");
         jfieldID actorsField = env->GetFieldID(movieClass, "actors", "Ljava/util/List;");
 
         env->SetObjectField(movieObject, nameField, env->NewStringUTF(movie->name.c_str()));
@@ -33,6 +34,7 @@ Java_com_smedic_hr_viewmodel_MoviesViewModel_getMovies(JNIEnv* env, jobject) {
         env->SetFloatField(movieObject, scoreField, movie->score);
         env->SetObjectField(movieObject, descriptionField, env->NewStringUTF(movie->description.c_str()));
         env->SetObjectField(movieObject, posterUrlField, env->NewStringUTF(movie->posterUrl.c_str()));
+        env->SetObjectField(movieObject, trailerYouTubeIdField, env->NewStringUTF(movie->trailerYouTubeId.c_str()));
         env->SetIntField(movieObject, idField, movie->id);
 
         //set list of actors

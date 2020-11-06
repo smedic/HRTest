@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso
  */
 class ActorsRecyclerViewAdapter(
     private val values: List<Actor>,
-    val clickListener: (Actor) -> Unit
+    private val clickListener: (Actor) -> Unit
 ) :
     RecyclerView.Adapter<ActorsRecyclerViewAdapter.ViewHolder>() {
 
@@ -30,10 +30,7 @@ class ActorsRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.name.text = item.name
-        Picasso.get()
-            .load(item.imageUrl)
-            .into(holder.photo)
-
+        Picasso.get().load(item.imageUrl).into(holder.photo)
         holder.itemView.setOnClickListener {
             clickListener(item)
         }

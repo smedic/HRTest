@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso
  */
 class MoviesRecyclerViewAdapter(
     private val values: List<Movie>,
-    val clickListener: (Movie) -> Unit
+    private val clickListener: (Movie) -> Unit
 ) :
     RecyclerView.Adapter<MoviesRecyclerViewAdapter.ViewHolder>() {
 
@@ -32,10 +32,7 @@ class MoviesRecyclerViewAdapter(
         val item = values[position]
         holder.name.text = item.name
         holder.rating.text = item.score.formattedRating()
-        Picasso.get()
-            .load(item.posterUrl)
-            .into(holder.photo)
-
+        Picasso.get().load(item.posterUrl).into(holder.photo)
         holder.itemView.setOnClickListener {
             clickListener(item)
         }

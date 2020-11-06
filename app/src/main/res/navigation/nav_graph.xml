@@ -30,4 +30,5 @@
         android:name="com.smedic.hr.WebPageFragment"
         android:label="fragment_web_view"
         tools:layout="@layout/web_page_fragment" />
+
 </navigation>

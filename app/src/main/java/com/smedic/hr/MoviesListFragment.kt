@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -13,6 +14,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.smedic.hr.adapter.MoviesRecyclerViewAdapter
 import com.smedic.hr.model.Movie
+import com.smedic.hr.tools.gone
+import com.smedic.hr.tools.setTint
+import com.smedic.hr.tools.visible
 import com.smedic.hr.viewmodel.MoviesViewModel
 import kotlinx.android.synthetic.main.movies_list_fragment.*
 
@@ -38,6 +42,16 @@ class MoviesListFragment : Fragment() {
 
         viewModel.getItems().observe(requireActivity()) { movies ->
             setupRecyclerView(view, movies)
+        }
+
+        show_search_button.setOnClickListener {
+            if (search_box.isVisible) {
+                search_box.gone(true)
+                show_search_button.colorFilter = null
+            } else {
+                search_box.visible(true)
+                show_search_button.setTint(R.color.orange)
+            }
         }
     }
 

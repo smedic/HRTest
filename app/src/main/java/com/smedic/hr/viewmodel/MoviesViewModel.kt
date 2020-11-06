@@ -30,7 +30,6 @@ class MoviesViewModel : ViewModel() {
         return movies
     }
 
-    //TODO CHECK DISPATCHER
     private suspend fun getMoviesFromNative() = withContext(Dispatchers.IO) {
         val data = async { getMovies() }
         try {

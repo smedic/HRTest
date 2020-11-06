@@ -12,5 +12,6 @@ data class Movie(
     val score: Float,
     val description: String,
     val actors: List<Actor>,
-    val posterUrl: String
+    val posterUrl: String,
+    val trailerYouTubeId: String,
 )

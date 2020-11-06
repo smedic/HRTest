@@ -1,5 +1,6 @@
 package com.smedic.hr
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.smedic.hr.WebPageFragment.Companion.ACTOR_BIOGRAPHY_URL
+import com.smedic.hr.YTPlayerActivity.Companion.TRAILER_YT_ID
 import com.smedic.hr.adapter.ActorsRecyclerViewAdapter
 import com.smedic.hr.model.Actor
 import com.smedic.hr.model.Movie
@@ -19,6 +21,7 @@ import com.smedic.hr.tools.formattedRating
 import com.smedic.hr.viewmodel.MoviesViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.movie_details_fragment.*
+
 
 /**
  * @author Stevan Medic
@@ -40,10 +43,22 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val movieId = arguments?.get(MOVIE_ID) as Int
-        viewModel.getMovie(movieId)?.let {
-            setMovieInfoLayout(it)
-            setupRecyclerView(view, it.actors)
+        viewModel.getMovie(movieId)?.let { movie ->
+            setMovieInfoLayout(movie)
+            setupRecyclerView(view, movie.actors)
+            play.setOnClickListener {
+                startYTActivity(movie.trailerYouTubeId)
+            }
         }
+    }
+
+    private fun startYTActivity(trailerUrl: String) {
+        val bundle = Bundle()
+        bundle.putString(TRAILER_YT_ID, trailerUrl)
+
+        val intent = Intent(requireActivity(), YTPlayerActivity::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 
     private fun setMovieInfoLayout(movie: Movie) {

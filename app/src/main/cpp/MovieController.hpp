@@ -19,7 +19,6 @@ namespace movies {
     public:
         std::string name;
         int age;
-        //optional challenge 1: Load image from URL
         std::string imageUrl;
         std::string biographyUrl;
     };
@@ -33,6 +32,7 @@ namespace movies {
         std::vector<Actor> actors;
         std::string description;
         std::string posterUrl;
+        std::string trailerYouTubeId;
     };
 
     class MovieController {
@@ -56,6 +56,8 @@ namespace movies {
                 } else {
                     movie->posterUrl = "https://sothebys-md.brightspotcdn.com/b8/1c/41e05570498e97a6b26c472f5cfe/168l20895-bjb6b.jpg";
                 }
+
+                movie->trailerYouTubeId = "xa_z57UatDY";
                 movie->description = "As students at the United States Navy's elite fighter weapons school compete to be best in the class, one daring young pilot learns a few things from a civilian instructor that are not taught in the classroom.";
 
                 auto tomCruise = Actor();
