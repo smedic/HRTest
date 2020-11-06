@@ -1,6 +1,8 @@
 package com.smedic.hr
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +31,7 @@ import kotlinx.android.synthetic.main.movies_list_fragment.*
 class MoviesListFragment : Fragment() {
 
     private val viewModel by activityViewModels<MoviesViewModel>()
+    private lateinit var moviesListAdapter : MoviesRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,25 +56,31 @@ class MoviesListFragment : Fragment() {
                 show_search_button.setTint(R.color.orange)
             }
         }
+
+        search_box.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+                moviesListAdapter.filter.filter(text)
+            }
+        })
     }
 
     private fun setupRecyclerView(view: View, movies: List<Movie>) {
-        val verticalDecorator =
-            DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL)
-        val horizontalDecorator =
-            DividerItemDecoration(requireActivity(), DividerItemDecoration.HORIZONTAL)
-
+        val divider = DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL)
         val drawable = ResourcesCompat.getDrawable(resources, R.drawable.divider, null)
-        verticalDecorator.setDrawable(drawable!!)
-        horizontalDecorator.setDrawable(drawable)
+        divider.setDrawable(drawable!!)
 
-        movies_list.addItemDecoration(verticalDecorator)
-        movies_list.addItemDecoration(horizontalDecorator)
-        //item_list.layoutManager = GridLayoutManager(this, 2)
+        movies_list.addItemDecoration(divider)
         movies_list.layoutManager = LinearLayoutManager(requireActivity())
-        movies_list.adapter = MoviesRecyclerViewAdapter(movies) {
+        moviesListAdapter = MoviesRecyclerViewAdapter(movies, movies) {
             val bundle = bundleOf(MovieDetailsFragment.MOVIE_ID to it.id)
             Navigation.findNavController(view).navigate(R.id.action_list_to_detail, bundle)
         }
+        movies_list.adapter = moviesListAdapter
     }
 }
